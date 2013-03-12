@@ -1,0 +1,6 @@
+SELECT p.descripcion, concat( uf.nombre, ' ', uf.apellidopaterno, ' ', uf.apellidomaterno ) nombre, uf.cargo, uf.email
+FROM usuario_final uf, usuario_final_area ufa, area a, proyecto p, persona_juridica pj
+WHERE uf.idusuariofinal = ufa.idusuariofinal
+AND ufa.idarea = a.idarea
+AND a.idproyecto = p.idproyecto
+AND p.idpersonajuridica = pj.idpersonajuridica
