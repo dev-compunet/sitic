@@ -1,0 +1,62 @@
+observaciones
+--------------
+Reservas
+--------
+1.-agregar el detalle de la reserva 
+2.-agregar campo destino (culminado)
+3.-agregar boton para agregar los (Empresa, ccosto, Cliente, Solicitante)de reservas.(culminado) 
+4.-cambiar el nombre fecha reserva x fecha recojo y la hora (culminado)
+5.-al cancelar el servicio indicar el motivo (culminado)
+6.-manual de usuario para ingreso de datos al sistema  (pendiente)
+7.-manejar 3 tarifas.(coorporativa-estandar-)(culminado)
+8.-coordinar capacitacion para los usuarios del sistema. (pendiente)
+9.-mostrar las alertas 1 hora antes de la hora de recojo. (culminado)
+16.-agregar en la pag web de taxihelp sugerencias y comentarios
+
+Email o Tlf Contacto:
+Comentario O Sugerencia: (culminado)
+17.-historico de lugares de recojo y lugares de destino historico de tlf (culminado)
+18.-agregar pasaporte al registrar al cliente (culminado)
+19.- revisar el modulo de facturacion  (pendiente)
+20.-agregar filtro por fecha en los pagos y que marque marque en rojo los vales que no se pagaran. (culminado)
+21.-las reservas en efectivo se puedan facturar.(pendiente)
+---------------------------------------------------------
+-------------------------------------------------------------
+----prueba de commit----00000000
+<?php
+class Zend_View_Helper_MsgInAs extends Zend_View_Helper_Abstract 
+{  
+    public function msgInAs ($message)
+    {
+        $auth = Zend_Auth::getInstance();  
+        if ($auth->hasIdentity()) {            
+            $mdlGen = new Application_Model_Generales();
+            $mdlRes = new Application_Model_Reserva();
+            $respen=substr($message, 0 , strlen($message)-1);
+            $arr_vales=$mdlGen->_StringaArray($respen);
+            $posts = $mdlRes->ListarResTime2($arr_vales, '1');
+                if(count($posts)>0){ $i=1;
+                    $html='<div class="notify">';
+                    foreach ($posts as $x):   
+                     if($i<=3){
+                    $html.='<div class="wrap_noti alerta notify">';
+                                    	$html.='<div class="fleft cont">';
+                                        	$html.='<div class="fleft text">';
+                                            	$html.='<span>'.$x->cliente.' <br /> Nro Doc. '.$x->nro_documento.'</span>';
+                                                $html.='<br>Observacion:'.$x->obs.'<br />';
+                                                $html.='<br class="fec">Fecha recojo: <br />'.$x->fecha_recojo.' - '.$x->hora_recojo.'<br />';
+                                                $html.='</div>';
+                                        $html.='</div>';
+                    $html.='</div>'; $i++;}
+                    endforeach;
+                    $html.='</div>';  
+                } 
+            }
+            return $html; 
+    } 
+} ?>
+<script type="text/javascript">
+      $(document).ready(function(){
+            setTimeout(function(){ $(".notify").fadeOut(8000);}, 8000);   
+        });
+</script>
