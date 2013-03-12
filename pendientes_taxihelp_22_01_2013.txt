@@ -22,7 +22,7 @@ Comentario O Sugerencia: (culminado)
 21.-las reservas en efectivo se puedan facturar.(pendiente)
 ---------------------------------------------------------
 -------------------------------------------------------------
-
+----prueba de commit----00000000
 <?php
 class Zend_View_Helper_MsgInAs extends Zend_View_Helper_Abstract 
 {  
